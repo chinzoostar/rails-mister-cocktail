@@ -1,0 +1,48 @@
+<hr>
+<h1><%= @cocktail.name %> </h1>
+<hr>
+<%= link_to cocktails_path do %>
+  <i class="fa fa-history"></i> Back to list
+<% end %>
+<br>
+<br>
+<h3>Ingredients</h3>
+<%= link_to new_cocktail_path do %>
+  <i class="fa fa-plus"></i> Add ingredient
+<% end %>
+
+<hr>
+<ul>
+  <% @ingredients.each do |ingredient| %>
+    <li>
+      <%= ingredient.name %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+<ul>
+  <% @doses.each do |dose| %>
+    <li>
+      <%= dose.name %>
+      <%= dose.description %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @dose.errors.any? %>
+  <div class="errors-container">
+    <ul>
+      <% @dose.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.association :ingredient %>
+  <%= f.input :description %>
+  <%= f.submit "Add ingredient", class: "btn btn-primary" %>
+<% end %>
+

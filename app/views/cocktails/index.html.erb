@@ -1,0 +1,30 @@
+<h1>Cocktails</h1>
+<hr>
+<ul>
+  <% @cocktails.each do |cocktail| %>
+    <li>
+      <div>
+        <span>
+          <h2>
+            <%= link_to cocktail.name, cocktail_path(cocktail.id) %>
+          </h2>
+          <%= link_to edit_cocktail_path(cocktail.id) do %>
+            <i class="fa fa-edit"></i>
+          <% end %>
+          <%= link_to new_cocktail_path, method: :delete, data: { confirm: "Delete #{cocktail.name}?" } do %>
+            <i class="fa fa-trash-alt"></i>
+          <% end %>
+        </span>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+<%= link_to new_cocktail_path do %>
+  <i class="fa fa-plus"></i> Add a new cocktail
+<% end %>
+<hr>
+<%= link_to new_cocktail_path do %>
+  <i class="fa fa-edit"></i> Edit cocktail
+<% end %>
