@@ -14,54 +14,33 @@
     <% @cocktails.each do |cocktail| %>
       <div class="col-sm-4 col-sm-offset-3">
         <div class="card mb-3" style="max-width: 540px;">
+
           <div class="row no-gutters">
             <div class="col-md-4">
-              <img src="..." class="card-img" alt="...">
+              <%= link_to cocktail_path(cocktail.id) do %>
+                <%= cl_image_tag cocktail.photo, height: 300, width: 200, crop: :scale %>
+              <% end %>
+
+              <!-- <img src="..." class="card-img" alt="..."> -->
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title"><%= cocktail.name %></h5>
+                  <%= link_to edit_cocktail_path(cocktail.id) do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                  <%= link_to new_cocktail_path, method: :delete, data: { confirm: "Delete #{cocktail.name}?" } do %>
+                    <i class="fa fa-trash-alt"></i>
+                  <% end %>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     <% end %>
 
   </div>
 </div>
-
-
-
-<h1>Cocktails</h1>
-<hr>
-<ul>
-  <% @cocktails.each do |cocktail| %>
-    <li>
-      <div>
-        <span>
-          <h2>
-            <%= link_to cocktail.name, cocktail_path(cocktail.id) %>
-          </h2>
-          <%= link_to edit_cocktail_path(cocktail.id) do %>
-            <i class="fa fa-edit"></i>
-          <% end %>
-          <%= link_to new_cocktail_path, method: :delete, data: { confirm: "Delete #{cocktail.name}?" } do %>
-            <i class="fa fa-trash-alt"></i>
-          <% end %>
-        </span>
-      </div>
-    </li>
-  <% end %>
-</ul>
-
-<hr>
-<%= link_to new_cocktail_path do %>
-  <i class="fa fa-plus"></i> Add a new cocktail
-<% end %>
-<hr>
-<%= link_to new_cocktail_path do %>
-  <i class="fa fa-edit"></i> Edit cocktail
-<% end %>

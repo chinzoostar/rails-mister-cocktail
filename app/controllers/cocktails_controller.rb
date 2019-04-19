@@ -31,6 +31,12 @@ class CocktailsController < ApplicationController
   end
 
   def update
+    if @cocktail.update(set_params)
+      # redirect_to cocktail_path(@cocktail)
+      redirect_to cocktails_path
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -41,6 +47,6 @@ class CocktailsController < ApplicationController
   end
 
   def set_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :photo)
   end
 end
